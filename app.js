@@ -1,7 +1,7 @@
 require ('dotenv').config();
 const request = require("postman-request");
 const url =
-  "http://api.weatherstack.com/current?access_key=process.env.WEATHER_API&query=New_York";
+  `http://api.weatherstack.com/current?access_key=${process.env.WEATHER_API}&query=New_York`;
 request(
   {
     url: url,
