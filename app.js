@@ -8,7 +8,10 @@ const forecast = require("./utils/forecast");
 
 // Callback chaining
 // use the output of 'data' as input to the second callback function (forecast)
-geocode("boston",(error,data) => {
+geocode(process.argv[2],(error,data) => {
+  if(process.argv[2]===undefined){
+    return console.log(chalk.red("ERROR. NO ADDRESS PROVIDED"));
+  }
   if(error){
     return console.log(error);
   }
