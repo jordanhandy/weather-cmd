@@ -1,12 +1,16 @@
-const request = require("postman-request");
-const forecast = (lat,lon,callback) => {
+const request = require("postman-request"); // request library
+const forecast = (lat,lon,callback) => { // args, and callback function
+    // define api URL
     const url = `http://api.weatherstack.com/current?access_key=${process.env.WEATHER_API}&query=`+lat+","+lon;
-    request({url,json:true},(error,{body}) => {
+    request({url,json:true},(error,{body}) => { // { body } destructuring
       if(error){
+          // if error object
         callback("Unable to connect to service",undefined);
       }else if(body.error){
+          // if location not found
         callback("Unable to find location.  Please try again.",undefined);
       } else{
+          // print forecast
         callback(undefined,"FORECAST: " +
                       body.current.weather_descriptions[0] +
                       "\nIt is currently " +
@@ -20,4 +24,5 @@ const forecast = (lat,lon,callback) => {
       }
     })
   }
+  // export
   module.exports = forecast;
