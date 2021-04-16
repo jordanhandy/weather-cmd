@@ -9,10 +9,14 @@ const forecast = require("./utils/forecast");
 // Callback chaining
 // use the output of 'data' as input to the second callback function (forecast)
 geocode("boston",(error,data) => {
-  console.log("Error",error);
-  console.log("Data",data);
-  forecast(data.latitude,data.longitude,(error, data) => {
-    console.log("Error",error);
-    console.log('Data',data);
+  if(error){
+    return console.log(error);
+  }
+  forecast(data.latitude,data.longitude,(error, forecastData) => {
+    if (error){
+      return console.log(error);
+    }
+    console.log(chalk.inverse.blue(data.placeName));
+    console.log(forecastData);
   })
 })
